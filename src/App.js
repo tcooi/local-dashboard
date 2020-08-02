@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Settings from './components/Settings';
+import Time from './components/Time';
+import Weather from './components/Weather';
+import PublicTransport from './components/PublicTransport';
+
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [data, setData] = useState({
+		isSubmit: false,
+		timezone: 'Europe/Stockholm',
+		city: 'Stockholm'
+	});
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setData(prevData => ({
+			...prevData,
+			isSubmit: !prevData.isSubmit
+		}))
+	}
+
+	const handleInputChange = (e) => {
+		const {name, value} = e.target;
+		setData(prevData => ({
+			...prevData,
+			[name]: value
+		}))
+	}
+
+	return (
+		<div className="App">
+			<Time data={data}/>
+			<Weather data={data}/>
+			<PublicTransport />
+			<Settings data={data} handleSubmit={handleSubmit} handleInputChange={handleInputChange} />
+		</div>
+	);
 }
 
 export default App;
