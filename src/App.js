@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Settings from './components/Settings';
 import Time from './components/Time';
 import Weather from './components/Weather';
@@ -13,8 +13,6 @@ function App() {
 		timezone: 'Europe/Stockholm',
 		city: 'Stockholm'
 	});
-
-	const test1 = 'testa'
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -35,10 +33,25 @@ function App() {
 	return (
 		<Router>
 			<div className="App">
-				<Time data={data} />
-				<Weather data={data} />
-				<Route exact path='/public-transport' render={(props) => <PublicTransport {...props} test={test1} />} />
-				<Settings data={data} handleSubmit={handleSubmit} handleInputChange={handleInputChange} />
+				<Switch>
+					<Route
+						exact path='/'
+						render={(props) => (
+							<div>
+								<Link to='/settings'>SETTINGS</Link> <br />
+								<Time {...props} data={data} />
+								<Weather {...props} data={data} />
+								<PublicTransport />
+							</div>
+						)}
+					/>
+					<Route
+						exact path='/settings'
+						render={(props) => (
+							<Settings {...props} data={data} handleSubmit={handleSubmit} handleInputChange={handleInputChange} />
+						)}
+					/>
+				</Switch>
 			</div>
 		</Router>
 	);

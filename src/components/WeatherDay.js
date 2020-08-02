@@ -12,8 +12,6 @@ const WeatherNow = ({ data }) => {
         const currentTime = moment.tz(data.timezone).format();
         const currentTimeStop = moment.tz(data.timezone).add(18, 'hours').format();
 
-        console.log(currentTime);
-
         const trimmed = forecasts.filter((item, i) => {
             return item.utcTime >= currentTime && item.utcTime <= currentTimeStop && i % 2;
         });

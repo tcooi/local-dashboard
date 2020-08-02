@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Settings = ({ data, handleSubmit, handleInputChange }) => {
     return (
         <div>
+            <Link to='/'>DASHBOARD</Link> <br />
             Settings
             <div>
                 Time
