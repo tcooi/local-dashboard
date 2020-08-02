@@ -37,12 +37,16 @@ const WeatherNow = ({ data }) => {
     return (
         <div className='WeatherNow'>
             <div>
-                Weather Now location: {weather.location}
+                <div className='Title'>
+                    Weather in {weather.location}
+                </div>
+                <div className='Now-temperature'>
+                    {weather.observation.temperature} C / feels like {weather.observation.comfort} C <br />
+                </div>
+                <div className='Now-description'>
+                    {weather.observation.description} <br />
+                </div>
             </div>
-            <br />
-            Weather Now temperature: {weather.observation.temperature}<br />
-            Weather Now comfort:  {weather.observation.comfort}<br />
-            Weather Now description: {weather.observation.description} <br />
         </div>
     );
 }

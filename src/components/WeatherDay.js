@@ -2,19 +2,24 @@ import React, { useState, useEffect } from 'react';
 import schedule from 'node-schedule';
 import moment from 'moment-timezone';
 
+import './WeatherDay.css'
+
 //show the weather for next few hours
-const WeatherNow = ({ data }) => {
+const WeatherDay = ({ data }) => {
     const [weather, setWeather] = useState(null);
 
-    //return forecasts for now and next 18 hours
+    //return forecasts for now and next 24 hours
     //todo make so time is not dependent on chosen timezon, should be from chosen city
+    //24 hour forecast is wrong when timezone and city are different
     const trimForecasts = (forecasts) => {
-        const currentTime = moment.tz(data.timezone).format();
-        const currentTimeStop = moment.tz(data.timezone).add(18, 'hours').format();
+        const currentTime = moment().tz(data.timezone).format();
+        const currentTimeStop = moment().tz(data.timezone).add(24, 'hours').format();
 
         const trimmed = forecasts.filter((item, i) => {
             return item.utcTime >= currentTime && item.utcTime <= currentTimeStop && i % 2;
         });
+
+        console.log(currentTime);
         return trimmed;
     }
 
@@ -42,18 +47,21 @@ const WeatherNow = ({ data }) => {
     }, [data.isSubmit]);
 
     return (
-        <div>
-            Weather Day<br />
-            <div>
+        <div className='Weather-day'>
+            <div className='day-title'>
+                Forecast for the next 24 hours
+            </div>
+            <div className='day-row'>
                 {weather && weather.map(item => (
-                    <div key={item.utcTime}>
-                        {item.utcTime}
-                        <br />
+                    <div key={item.utcTime} className='day-row-item'>
+                        {moment(item.utcTime).tz(data.timezone).format('HH:mm')} <br />
+                        {item.temperature}
                     </div>
                 ))}
+
             </div>
         </div>
     )
 }
 
-export default WeatherNow;
+export default WeatherDay;

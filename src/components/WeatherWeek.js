@@ -24,7 +24,7 @@ const WeatherWeek = ({ data }) => {
 
     return (
         <div>
-            Weather Week <br />
+            Forecast for the next 7 days <br />
             <div>
                 {weather && weather.map(item => (
                     <div key={item.utcTime}>

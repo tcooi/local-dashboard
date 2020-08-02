@@ -1,0 +1,20 @@
+.Weather-day {
+    padding-top: 2%;
+}
+
+.day-title {
+    font-size: 1.8vw;
+    font-style: italic;
+    background-color: green;
+}
+
+.day-row {
+    background-color: khaki;
+    display: flex;
+    flex-direction: row;
+}
+
+.day-row-item {
+    padding-right: 1%;
+}
+
