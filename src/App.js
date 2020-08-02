@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Settings from './components/Settings';
 import Time from './components/Time';
 import Weather from './components/Weather';
@@ -13,6 +14,8 @@ function App() {
 		city: 'Stockholm'
 	});
 
+	const test1 = 'testa'
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setData(prevData => ({
@@ -22,7 +25,7 @@ function App() {
 	}
 
 	const handleInputChange = (e) => {
-		const {name, value} = e.target;
+		const { name, value } = e.target;
 		setData(prevData => ({
 			...prevData,
 			[name]: value
@@ -30,12 +33,14 @@ function App() {
 	}
 
 	return (
-		<div className="App">
-			<Time data={data}/>
-			<Weather data={data}/>
-			<PublicTransport />
-			<Settings data={data} handleSubmit={handleSubmit} handleInputChange={handleInputChange} />
-		</div>
+		<Router>
+			<div className="App">
+				<Time data={data} />
+				<Weather data={data} />
+				<Route exact path='/public-transport' render={(props) => <PublicTransport {...props} test={test1} />} />
+				<Settings data={data} handleSubmit={handleSubmit} handleInputChange={handleInputChange} />
+			</div>
+		</Router>
 	);
 }
 

@@ -1,8 +1,8 @@
 import React from 'react';
 
-const PublicTransport = () => {
+const PublicTransport = ({ test }) => {
     return (
-        <div>Public transport here</div>
+    <div>Public transport here {test}</div>
     )
 }
 
