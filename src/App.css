@@ -1,5 +1,14 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
 .App {
-  text-align: center;
+  text-align: left;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.Switch {
+  position: fixed;
+  top: 0;
+  right: 0;
 }
 
 .App-logo {

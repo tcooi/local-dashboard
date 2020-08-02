@@ -32,13 +32,15 @@ function App() {
 
 	return (
 		<Router>
-			<div className="App">
+			<div className='App'>
 				<Switch>
 					<Route
 						exact path='/'
 						render={(props) => (
 							<div>
-								<Link to='/settings'>SETTINGS</Link> <br />
+								<div className='Switch'>
+									<Link to='/settings'>SETTINGS</Link> <br />
+								</div>
 								<Time {...props} data={data} />
 								<Weather {...props} data={data} />
 								<PublicTransport />

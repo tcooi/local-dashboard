@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment-timezone';
 
+import './Time.css';
+
 const Time = ({ data }) => {
-    const [date, setDate] =  useState(null);
+    const [date, setDate] = useState(null);
     const [weekday, setWeekday] = useState(null);
     const [clock, setClock] = useState(null);
 
@@ -35,10 +37,16 @@ const Time = ({ data }) => {
     }, [data.isSubmit]);
 
     return (
-        <div>
-            <p>{date}</p>
-            <p>{weekday}</p>
-            <p>{clock}</p>
+        <div className='Time'>
+            <div className='Time-date'>
+                {date}
+            </div>
+            <div className='Time-weekday'>
+                {weekday}
+            </div>
+            <div className='Time-clock'>
+                {clock}
+            </div>
         </div>
     )
 }

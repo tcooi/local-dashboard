@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import schedule from 'node-schedule';
 
+import './WeatherNow.css';
+
 //show the current weather
 const WeatherNow = ({ data }) => {
     const [weather, setWeather] = useState({
@@ -33,8 +35,11 @@ const WeatherNow = ({ data }) => {
     }, [data.isSubmit]);
 
     return (
-        <div>
-            Weather Now location: {weather.location} <br />
+        <div className='WeatherNow'>
+            <div>
+                Weather Now location: {weather.location}
+            </div>
+            <br />
             Weather Now temperature: {weather.observation.temperature}<br />
             Weather Now comfort:  {weather.observation.comfort}<br />
             Weather Now description: {weather.observation.description} <br />

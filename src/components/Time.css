@@ -1,0 +1,17 @@
+.Time {
+    padding-top: 3.5%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.Time-date {
+    font-size: 6vw;
+}
+
+.Time-weekday {
+    font-size: 3.5vw;
+}
+
+.Time-clock {
+    font-size: 16vw;
+}

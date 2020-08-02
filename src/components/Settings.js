@@ -1,10 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import './Settings.css'
+
 const Settings = ({ data, handleSubmit, handleInputChange }) => {
     return (
-        <div>
-            <Link to='/'>DASHBOARD</Link> <br />
+        <div className='Settings'>
+            <div className='Switch'>
+                <Link to='/'>DASHBOARD</Link> <br />
+            </div>
             Settings
             <div>
                 Time
