@@ -1,0 +1,20 @@
+.weather-week {
+    padding-top: 2%;
+}
+
+.week-title {
+    font-size: 1.8vw;
+    font-style: italic;
+    background-color: green;
+}
+
+.week-row {
+    background-color: khaki;
+    display: flex;
+    flex-direction: row;
+}
+
+.week-row-item {
+    padding-right: 1%;
+}
+

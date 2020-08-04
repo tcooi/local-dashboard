@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import schedule from 'node-schedule';
 
+import './WeatherWeek.css';
+
 //show weather for coming days
 const WeatherWeek = ({ data }) => {
     const [weather, setWeather] = useState([]);
@@ -23,12 +25,16 @@ const WeatherWeek = ({ data }) => {
     }, [data.isSubmit]);
 
     return (
-        <div>
-            Forecast for the next 7 days <br />
-            <div>
+        <div className='weather-week'>
+            <div className='week-title'>
+                Forecast for the next 7 days
+            </div>
+            <div className='week-row'>
                 {weather && weather.map(item => (
-                    <div key={item.utcTime}>
+                    <div key={item.utcTime} className='week-item'>
                         {item.weekday} <br />
+                        {item.highTemperature} <br />
+                        {item.lowTemperature}
                     </div>
                 ))}
             </div>
