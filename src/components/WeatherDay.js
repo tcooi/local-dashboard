@@ -23,13 +23,21 @@ const WeatherDay = ({ data }) => {
         return trimmed;
     }
 
+    const roundTemperature = (forecasts) => {
+        forecasts.forEach(item => {
+            item.temperature = parseFloat(item.temperature).toFixed(1);
+        })
+        return forecasts;
+    } 
+
     const hourlyWeather = async () => {
         try {
             const weatherData = await fetch(`https://weather.ls.hereapi.com/weather/1.0/report.json?apiKey=${process.env.REACT_APP_HERE_KEY}&product=forecast_hourly&name=${data.city}`);
             const weatherJson = await weatherData.json();
 
             const trimmedWeather = trimForecasts(weatherJson.hourlyForecasts.forecastLocation.forecast);
-            setWeather(trimmedWeather);
+            const rounded = roundTemperature(trimmedWeather);
+            setWeather(rounded);
 
             console.log('weather hourly data updated');
         } catch (error) {
