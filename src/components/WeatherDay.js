@@ -23,7 +23,20 @@ const WeatherDay = ({ data }) => {
         return trimmed;
     }
 
-    const roundTemperature = (forecasts) => {
+    const setPrecipitation = (forecasts) => {
+        forecasts.forEach(item => {
+            if (item.rainFall === '*' && item.snowFall === '*') {
+                item.anyPrecipitation = 0;
+            } else if (item.rainFall === '*') {
+                item.anyPrecipitation = item.snowFall;
+            } else {
+                item.anyPrecipitation = item.rainFall;
+            }
+        });
+        return forecasts;
+    }
+
+    const formatTemperature = (forecasts) => {
         forecasts.forEach(item => {
             item.temperature = parseFloat(item.temperature).toFixed(1);
         })
@@ -35,9 +48,10 @@ const WeatherDay = ({ data }) => {
             const weatherData = await fetch(`https://weather.ls.hereapi.com/weather/1.0/report.json?apiKey=${process.env.REACT_APP_HERE_KEY}&product=forecast_hourly&name=${data.city}`);
             const weatherJson = await weatherData.json();
 
-            const trimmedWeather = trimForecasts(weatherJson.hourlyForecasts.forecastLocation.forecast);
-            const rounded = roundTemperature(trimmedWeather);
-            setWeather(rounded);
+            const trimmed = trimForecasts(weatherJson.hourlyForecasts.forecastLocation.forecast);
+            const precipitation = setPrecipitation(trimmed)
+            const formatted = formatTemperature(precipitation);
+            setWeather(formatted);
 
             console.log('weather hourly data updated');
         } catch (error) {
@@ -63,7 +77,8 @@ const WeatherDay = ({ data }) => {
                 {weather && weather.map(item => (
                     <div key={item.utcTime} className='day-row-item'>
                         {moment(item.utcTime).tz(data.timezone).format('HH:mm')} <br />
-                        {item.temperature}
+                        {item.temperature} <br />
+                        {item.anyPrecipitation}
                     </div>
                 ))}
 
