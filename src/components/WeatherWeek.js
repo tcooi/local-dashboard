@@ -6,12 +6,37 @@ import './WeatherWeek.css';
 //show weather for coming days
 const WeatherWeek = ({ data }) => {
     const [weather, setWeather] = useState([]);
+    
+    //check for rain or snow, set anyPrecipitation to whatever have value
+    const setPrecipitation = (forecasts) => {
+        forecasts.forEach(item => {
+            if (item.rainFall === '*' && item.snowFall === '*') {
+                item.anyPrecipitation = 0;
+            } else if (item.rainFall === '*') {
+                item.anyPrecipitation = item.snowFall;
+            } else {
+                item.anyPrecipitation = item.rainFall;
+            }
+        });
+        return forecasts;
+    }
+
+    const formatForecasts = (forecasts) => {
+        forecasts.forEach(item => {
+            item.highTemperature = parseFloat(item.highTemperature).toFixed(1);
+            item.lowTemperature = parseFloat(item.lowTemperature).toFixed(1);
+        });
+        return forecasts;
+    }
 
     const weeklyWeather = async () => {
         const weatherData = await fetch(`https://weather.ls.hereapi.com/weather/1.0/report.json?apiKey=${process.env.REACT_APP_HERE_KEY}&product=forecast_7days_simple&name=${data.city}`);
         const weatherJson = await weatherData.json();
 
-        setWeather(weatherJson.dailyForecasts.forecastLocation.forecast)
+        const precipitation = setPrecipitation(weatherJson.dailyForecasts.forecastLocation.forecast);
+        const formatted = formatForecasts(precipitation);
+
+        setWeather(formatted);
         console.log(`weather weekly data updated`);
     }
 
@@ -34,7 +59,8 @@ const WeatherWeek = ({ data }) => {
                     <div key={item.utcTime} className='week-item'>
                         {item.weekday} <br />
                         {item.highTemperature} <br />
-                        {item.lowTemperature}
+                        {item.lowTemperature} <br />
+                        {item.anyPrecipitation}
                     </div>
                 ))}
             </div>
