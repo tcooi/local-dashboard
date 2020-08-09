@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import schedule from 'node-schedule';
 import moment from 'moment-timezone';
 
+import TemperatureColor from './TemperatureColor';
+
 import './WeatherDay.css'
 
 //show the weather for next few hours
@@ -18,8 +20,6 @@ const WeatherDay = ({ data }) => {
         const trimmed = forecasts.filter((item, i) => {
             return item.utcTime >= currentTime && item.utcTime <= currentTimeStop && i % 2;
         });
-
-        console.log(currentTime);
         return trimmed;
     }
 
@@ -41,7 +41,7 @@ const WeatherDay = ({ data }) => {
             item.temperature = parseFloat(item.temperature).toFixed(1);
         })
         return forecasts;
-    } 
+    }
 
     const hourlyWeather = async () => {
         try {
@@ -76,8 +76,13 @@ const WeatherDay = ({ data }) => {
             <div className='day-row'>
                 {weather && weather.map(item => (
                     <div key={item.utcTime} className='day-row-item'>
-                        {moment(item.utcTime).tz(data.timezone).format('HH:mm')} <br />
-                        {item.temperature} <br />
+                        <div className='day-row-item-title'>
+                            {moment(item.utcTime).tz(data.timezone).format('HH:mm')} <br />
+                        </div>
+                        <div className='day-row-item-data'>
+                            <TemperatureColor temperature={item.temperature} />
+
+                        </div>
                         {item.anyPrecipitation}
                     </div>
                 ))}

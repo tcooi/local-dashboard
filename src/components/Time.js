@@ -7,6 +7,7 @@ const Time = ({ data }) => {
     const [date, setDate] = useState(null);
     const [weekday, setWeekday] = useState(null);
     const [clock, setClock] = useState(null);
+    const [seconds, setSeconds] = useState(null);
 
     const updateTime = () => {
         const date = moment().tz(data.timezone).format('YYYY MMMM DD');
@@ -15,8 +16,11 @@ const Time = ({ data }) => {
         const weekday = moment().tz(data.timezone).format('dddd');
         setWeekday(weekday);
 
-        const clock = moment().tz(data.timezone).format('HH:mm:ss')
+        const clock = moment().tz(data.timezone).format('HH:mm');
         setClock(clock);
+
+        const seconds = moment().tz(data.timezone).format(':ss');
+        setSeconds(seconds);
     };
 
     // const updateTime = useCallback(() => {
@@ -38,14 +42,21 @@ const Time = ({ data }) => {
 
     return (
         <div className='Time'>
-            <div className='Time-date'>
-                {date}
-            </div>
-            <div className='Time-weekday'>
-                {weekday}
+            <div className='time-date-weekday'>
+                <div className='Time-date'>
+                    {date}
+                </div>
+                <div className='Time-weekday'>
+                    {weekday}
+                </div>
             </div>
             <div className='Time-clock'>
-                {clock}
+                <div>
+                    {clock}
+                </div>
+                <div className='time-clock-seconds'>
+                    {seconds}
+                </div>
             </div>
         </div>
     )

@@ -5,16 +5,24 @@
 .week-title {
     font-size: 1.8vw;
     font-style: italic;
-    background-color: green;
+    padding-bottom: 1%;
+    /* background-color: green; */
 }
 
 .week-row {
-    background-color: khaki;
+    /* background-color: khaki; */
     display: flex;
     flex-direction: row;
 }
 
 .week-row-item {
-    padding-right: 1%;
+    flex-basis: 100%;
 }
 
+.week-row-item-title {
+    font-size: 1.8vw;
+}
+
+.week-row-item-data {
+    font-size: 2vw;
+}

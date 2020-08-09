@@ -41,7 +41,7 @@ const WeatherNow = ({ data }) => {
                     Weather in {weather.location}
                 </div>
                 <div className='Now-temperature'>
-                    {weather.observation.temperature} C / feels like {weather.observation.comfort} C <br />
+                    {parseFloat(weather.observation.temperature).toFixed(1)} °C, feels like {parseFloat(weather.observation.comfort).toFixed(1)} °C <br />
                 </div>
                 <div className='Now-description'>
                     {weather.observation.description} <br />

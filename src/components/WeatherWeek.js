@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import schedule from 'node-schedule';
 
+import TemperatureColor from './TemperatureColor';
+
 import './WeatherWeek.css';
 
 //show weather for coming days
 const WeatherWeek = ({ data }) => {
     const [weather, setWeather] = useState([]);
-    
+
     //check for rain or snow, set anyPrecipitation to whatever have value
     const setPrecipitation = (forecasts) => {
         forecasts.forEach(item => {
@@ -56,10 +58,16 @@ const WeatherWeek = ({ data }) => {
             </div>
             <div className='week-row'>
                 {weather && weather.map(item => (
-                    <div key={item.utcTime} className='week-item'>
-                        {item.weekday} <br />
-                        {item.highTemperature} <br />
-                        {item.lowTemperature} <br />
+                    <div key={item.utcTime} className='week-row-item'>
+                        <div className='week-row-item-title'>
+                            {item.weekday} <br />
+                        </div>
+                        <div className='week-row-item-data'>
+                            <TemperatureColor temperature={item.highTemperature} />
+                        </div>
+                        <div className='week-row-item-data'>
+                            <TemperatureColor temperature={item.lowTemperature} />
+                        </div>
                         {item.anyPrecipitation}
                     </div>
                 ))}

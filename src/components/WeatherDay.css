@@ -5,16 +5,24 @@
 .day-title {
     font-size: 1.8vw;
     font-style: italic;
-    background-color: green;
+    /* background-color: green; */
+    padding-bottom: 1%;
 }
 
 .day-row {
-    background-color: khaki;
+    /* background-color: khaki; */
     display: flex;
     flex-direction: row;
 }
 
 .day-row-item {
-    padding-right: 1%;
+    flex-basis: 100%;
 }
 
+.day-row-item-title {
+    font-size: 1.8vw;
+}
+
+.day-row-item-data {
+    font-size: 2vw;
+}

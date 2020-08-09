@@ -4,14 +4,30 @@
     padding-right: 5%;
 }
 
+.time-date-weekday {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* line-height: 1; */
+}
+
 .Time-date {
-    font-size: 6vw;
+    font-size: 5vw;
+    /* line-height: 1; */
 }
 
 .Time-weekday {
-    font-size: 3.5vw;
+    font-size: 5vw;
 }
 
 .Time-clock {
+    padding-top: 7%;
     font-size: 16vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.time-clock-seconds {
+    font-size: 8vw;
+    padding-top: 6%;
 }
