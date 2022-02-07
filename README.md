@@ -1,3 +1,5 @@
+# local-dashboard
+
 create .env file in root folder
 ```
 HERE_API=APIKEY
