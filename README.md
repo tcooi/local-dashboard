@@ -1,6 +1,8 @@
 create .env file in root folder
 ```
 HERE_API=APIKEY
+RESEROBOT_STOPLOOKUP_API=APIKEY
+RESEROBOT_TIMETABLES_API=APIKEY
 ```
 
 fix dependencies
